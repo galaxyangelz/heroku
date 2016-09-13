@@ -12,12 +12,13 @@ var coursesData = [{
 		name : "course2",
 		description : "course2 desc",
 	}]
-
-//course function
-//Function for /courses
+	
 router.getCourse = function () {
 	return coursesData;
 }
+
+//course function
+//Function for /courses
 
 function getAllCourse() {
 	return coursesData;
