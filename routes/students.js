@@ -15,7 +15,7 @@ var studentData = [{
 		class : "DIN2"
 	}]
 
-router.getStudent = function () {
+router.getstudentData = function () {
 	return studentData;
 }
 
@@ -25,38 +25,36 @@ function getAllStudent() {
 	return studentData;
 }
 
-function addStudent(student) {
+function addStudent (student) {
 	studentData.push(student);
 }
 
 //Function for /students/:sid
-function getStudentByID(sid) {
-	return studentData.filter(function(student){
-        if(student.sid == sid)
-        {
+function getStudentByID (sid) {
+	return studentData.filter(function (student) {
+        if(student.sid == sid) {
             return student;
         }
     });
 }
 
-function deleteStudentByID(sid) {
+function deleteStudentByID (sid) {
 	for (var i = 0; i < studentData.length; i++) {
-        if(studentData[i].sid == sid)
-        {
+        if(studentData[i].sid == sid) {
             studentData.splice(i,1);
         }
     }
 }
 
 //Function for /students/:sid/edit
-function editStudent(sid, newstudent) {
+function editStudent (sid, newstudent) {
 	for (var i = 0; i < studentData.length; i++) {
-        if(studentData[i].sid == sid)
-        {
+        if(studentData[i].sid == sid) {
             studentData[i].sid = newstudent.sid;
             studentData[i].name = newstudent.name;
             studentData[i].address = newstudent.address;
             studentData[i].class = newstudent.class;
+            return;
         }
     }
 }
@@ -81,7 +79,7 @@ router.route('/students/:sid')
 		res.send("deleted");
 	})
 
-router.route('/students/:sid/edit')
+router.route('/students/:sid/')
 	.put(function (req,res,next) {
 		editStudent(req.params.sid,req.body);
 		res.send("updated");

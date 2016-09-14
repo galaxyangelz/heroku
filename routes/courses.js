@@ -12,8 +12,8 @@ var coursesData = [{
 		name : "course2",
 		description : "course2 desc",
 	}]
-	
-router.getCourse = function () {
+
+router.getcourseData = function () {
 	return coursesData;
 }
 
@@ -24,37 +24,35 @@ function getAllCourse() {
 	return coursesData;
 }
 
-function addCourse(course) {
+function addCourse (course) {
 	coursesData.push(course);
 }
 
 //Function for /courses/:cid
-function getCourseByID(cid) {
-	return coursesData.filter(function(course){
-        if(course.cid == cid)
-        {
+function getCourseByID (cid) {
+	return coursesData.filter(function (course) {
+        if(course.cid == cid) {
             return course;
         }
     });
 }
 
-function deleteCourseByID(cid) {
+function deleteCourseByID (cid) {
 	for (var i = 0; i < coursesData.length; i++) {
-        if(coursesData[i].cid == cid)
-        {
+        if(coursesData[i].cid == cid) {
             coursesData.splice(i,1);
         }
     }
 }
 
 //Function for /courses/:cid/edit
-function editCourse(cid, newcourse) {
+function editCourse (cid, newcourse) {
 	for (var i = 0; i < coursesData.length; i++) {
-        if(coursesData[i].cid == cid)
-        {
+        if(coursesData[i].cid == cid) {
             coursesData[i].cid = newcourse.cid;
             coursesData[i].name = newcourse.name;
             coursesData[i].description = newcourse.description;
+            return;
         }
     }
 }
@@ -79,7 +77,7 @@ router.route('/courses/:cid')
 		res.send("deleted");
 	})
 
-router.route('/courses/:cid/edit')
+router.route('/courses/:cid/')
 	.put(function (req,res,next) {
 		editCourse(req.params.cid,req.body);
 		res.send("updated");

@@ -10,26 +10,39 @@ app.set('port', (process.env.PORT || 80));
 app.use(bodyParser.json());
 
 app.use('/api', students);
+app.use('/api', courses);
+app.use('/api', grades);
 
 //
 //ROUTE
 //
 //Route for students
-app.get('/students', students).post('/students', students);
-app.get('/students/:sid', students).delete('/students/:sid', students);
-app.put('/students/:sid/edit', students);
+app.get('/students', students)
+	.post('/students', students);
+
+app.get('/students/:sid', students)
+	.delete('/students/:sid', students)
+	.put('/students/:sid/', students);
 
 //Route for courses
-app.get('/courses', courses).post('/courses', courses);
-app.get('/courses/:sid', courses).delete('/courses/:sid', courses);
-app.put('/courses/:sid/edit', courses);
+app.get('/courses', courses)
+	.post('/courses', courses);
+
+app.get('/courses/:cid', courses)
+	.delete('/courses/:cid', courses)
+	.put('/courses/:cid/', courses);
 
 //Route for grades
-app.get('/grades',grades);
+app.get('/courses/:cid/grades', grades)
+	.post('/courses/:cid/grades',grades);
+
+app.get('/courses/:cid/grades/:sid',grades)
+	.put('/courses/:cid/grades/:sid',grades)
+	.delete('/courses/:cid/grades/:sid',grades);
 
 //Route homepage
 app.get('/', function(req, res) {
-	res.send("Hello world");
+	res.send("Welcome to my API");
 });
 
 app.listen(app.get('port'), function() {
